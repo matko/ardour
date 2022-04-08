@@ -106,12 +106,12 @@ Analyser::set_duration (samplecnt_t n_samples)
 	_n_samples = n_samples;
 
 	const size_t peaks = sizeof (_result.peaks) / sizeof (ARDOUR::PeakData::PeakDatum) / 4;
-	_spp = ceil ((_n_samples + 2.f) / (float) peaks);
+	_spp = (_n_samples + 1) / peaks + 1;
 
 	const size_t swh = sizeof (_result.spectrum) / sizeof (float);
 	const size_t height = sizeof (_result.spectrum[0]) / sizeof (float);
 	const size_t width = swh / height;
-	_fpp = ceil ((_n_samples + 2.f) / (float) width);
+	_fpp = (_n_samples + 1) / width + 1;
 }
 
 void
